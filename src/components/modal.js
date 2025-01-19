@@ -6,7 +6,6 @@ function openModal(popupContent) {
   
   document.addEventListener('keyup', closeDownEscape);
   document.addEventListener('mousedown', overlayMouseDown);
-  document.addEventListener('mouseup', overlayMouseUp);
 };
 
 function closeModal() {
@@ -14,7 +13,6 @@ function closeModal() {
 
   document.removeEventListener('keyup', closeDownEscape);
   document.removeEventListener('mousedown', overlayMouseDown);
-  document.removeEventListener('mouseup', overlayMouseUp);
 }
 
 //ОТКРЫТИЕ ПОПАПА С КАРТИНКОЙ
@@ -32,13 +30,7 @@ function openPopupImage(imagePopup) {
 // ЗАКРЫТИЕ ПРИ КЛИКЕ НА ФОН
 function overlayMouseDown(evt){
   if(!evt.target.classList.contains('popup_is-opened')) return;
-}
-
-function overlayMouseUp(evt){ 
-  if (evt.target.isClickOnThis && evt.target.classList.contains('popup_is-opened')) { 
-    evt.preventDefault(); 
-    closeModal(evt.target); 
-  }
+  closeModal(evt.target); 
 }
 
 //ЗАКРЫТИЕ НА ESC
