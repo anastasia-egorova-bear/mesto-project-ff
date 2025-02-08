@@ -1,5 +1,6 @@
 export { createCard, deleteCard, toggleIsLiked };
 import { cardTemplate } from '../index.js';
+// import { deleteCardApi, setLikeApi } from './api'
 
 function createCard({ name, link }, deleteCard, toggleIsLiked, openPopupImage) {
   const cardElement = cardTemplate.querySelector('.places__item').cloneNode(true);

@@ -2,7 +2,10 @@ import './pages/index.css';
 import { createCard, deleteCard, toggleIsLiked } from './components/card.js';
 import { initialCards } from './scripts/cards.js'
 import { openModal, closeModal } from './components/modal.js';
-export { cardTemplate };
+import { enableValidation, /*clearValidation,*/ ValidationConfig } from './components/validation.js';
+export { cardTemplate, 
+  // enableValidationConfig
+ };
 
 const content = document.querySelector('.content');
 const cardTemplate = document.querySelector('#card-template').content;
@@ -26,6 +29,15 @@ const profileDescription = document.querySelector('.profile__description');
 const formElementPlace = document.querySelector('.popup__form[name="new-place"]')
 const placeNameInput = formElementPlace.querySelector('.popup__input_type_card-name');
 const linkImageInput = formElementPlace.querySelector('.popup__input_type_url');
+
+/*const enableValidationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};*/
 
 function renderCard() {
   initialCards.forEach(({ name, link }) => {
@@ -67,6 +79,7 @@ popupOverlayList.forEach(popup => popup.classList.add('popup_is-animated'));
 
 popupCloseList.forEach(button => button.addEventListener('click', () => { 
   closeModal(document.querySelector('.popup_is-opened')); 
+
 }));
 
 formElementProfile.addEventListener('submit', handleEditProfileSubmit); 
@@ -76,7 +89,9 @@ profileButton.addEventListener('click', () => {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileDescription.textContent;
 
+  // clearValidation(popupEditContent, config)
   openModal(popupEditContent);
+
 });
 
 addButton.addEventListener('click', () => {
@@ -84,3 +99,15 @@ addButton.addEventListener('click', () => {
 });
 
 renderCard();
+
+//НАСТРАИВАЕМ ОБРАБОТЧИКИ ЗАКРЫТИЯ ПОПАПОВ
+
+//ВКЛЮЧАЕМ ВАЛИДАЦИЮ
+// enableValidation(ValidationConfig);
+
+/*
+ЗАГРУЖАЕМ ДАННЫЕ И ОТРИСОВЫВАЕМБ ТК ДЛЯ ОТОБРАДЕНИЯ НУЖЕН id пользователя
+то обязательно нужен Promise.all, но допукается 
+использование  вложенного запроса*/
+
+
