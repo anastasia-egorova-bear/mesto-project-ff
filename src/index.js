@@ -2,7 +2,7 @@ import './pages/index.css';
 import { createCard, deleteCard, toggleIsLiked } from './components/card.js';
 import { initialCards } from './scripts/cards.js'
 import { openModal, closeModal } from './components/modal.js';
-import { enableValidation, /*clearValidation,*/ ValidationConfig } from './components/validation.js';
+import { enableValidation, /*clearValidation, */ValidationConfig } from './components/validation.js';
 export { cardTemplate, 
   // enableValidationConfig
  };
@@ -103,7 +103,7 @@ renderCard();
 //НАСТРАИВАЕМ ОБРАБОТЧИКИ ЗАКРЫТИЯ ПОПАПОВ
 
 //ВКЛЮЧАЕМ ВАЛИДАЦИЮ
-// enableValidation(ValidationConfig);
+enableValidation(ValidationConfig);
 
 /*
 ЗАГРУЖАЕМ ДАННЫЕ И ОТРИСОВЫВАЕМБ ТК ДЛЯ ОТОБРАДЕНИЯ НУЖЕН id пользователя

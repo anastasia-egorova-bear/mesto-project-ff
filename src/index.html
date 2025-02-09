@@ -42,7 +42,8 @@
         <div class="popup__content">
           <button type="button" class="popup__close"></button>
           <h3 class="popup__title">Редактировать профиль</h3>
-          <form class="popup__form" name="edit-profile">
+          <form class="popup__form" name="edit-profile" novalidate>
+            <div>
             <input
                 type="text"
                 name="name"
@@ -52,9 +53,12 @@
                 maxlength="40"
                 pattern="^[A-Za-zА-Яа-яЁё\s]+$"
                 data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
-                id="name-error"
+                id="name-input"
                 required
               />
+              <span class="popup__error" id="name-input-error"></span>
+            </div>
+              <div>
               <input
               type="text"
               name="description"
@@ -64,9 +68,11 @@
               maxlength="200"
               pattern="^[A-Za-zА-Яа-яЁё\s]+$"
               data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
-              id="description-error"
+              id="description-input"
               required
             />
+            <span class="popup__error" id="description-error"></span>
+          </div>
             <button type="submit" class="button popup__button">
               Сохранить
             </button>
@@ -77,7 +83,8 @@
         <div class="popup__content">
           <button type="button" class="popup__close"></button>
           <h3 class="popup__title">Новое место</h3>
-          <form class="popup__form" name="new-place">
+          <form class="popup__form" name="new-place" novalidate>
+            <div>
             <input
             type="text"
             name="place-name"
@@ -86,17 +93,22 @@
             minlength="2"
             maxlength="30"
             pattern="^[A-Za-zА-Яа-яЁё\s]+$"
-            id="place-name-error"
+            id="place-name-input"
             required
             />
+            <span class="popup__error" id="place-name-error"></span>
+          </div>
+          <div>
             <input
                 type="url"
                 name="link"
                 class="popup__input popup__input_type_url"
                 placeholder="Ссылка на картинку"
-                id="place-link-error"
+                id="place-link-input"
                 required
             />
+            <span class="popup__error" id="place-link-error"></span>
+          </div>
             <button type="submit" class="button popup__button">
               Сохранить
             </button>
@@ -124,4 +136,3 @@
     </template>
   </body>
 </html>
-<!-- [A-Za-zА-Яа-яёЁ\s\-]+ -->
