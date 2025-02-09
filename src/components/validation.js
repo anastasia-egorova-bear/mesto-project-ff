@@ -1,16 +1,16 @@
+// import { ValidationConfig } from '../index.js'
 export { enableValidation, 
   // clearValidation, 
-  ValidationConfig 
 }
 
-const ValidationConfig = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: '.popup__button_disabled',
-  inputErrorClass: '.popup__input_type_error',
-  errorClass: '.popup__error_visible'
-};
+// const ValidationConfig = {
+//   formSelector: '.popup__form',
+//   inputSelector: '.popup__input',
+//   submitButtonSelector: '.popup__button',
+//   inactiveButtonClass: '.popup__button_disabled',
+//   inputErrorClass: '.popup__input_type_error',
+//   errorClass: '.popup__error_visible'
+// };
 
   const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = document.getElementById(`${inputElement.id}-error`);
@@ -33,16 +33,20 @@ const hideInputError = (formElement, inputElement) => {
 
 const checkInputValidity = (formElement, inputElement) => {
   if (inputElement.validity.patternMismatch) {
-    inputElement.setCustomValidity('Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы');
-  } else {
-    inputElement.setCustomValidity('');
-  }
-  if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.dataset.errorMessage);
-  } else {
-    hideInputError(formElement, inputElement);
-  }
-};
+      // данные атрибута доступны у элемента инпута через ключевое слово dataset.
+      // обратите внимание, что в js имя атрибута пишется в camelCase (да-да, в
+      // HTML мы писали в kebab-case, это не опечатка)
+  inputElement.setCustomValidity(inputElement.dataset.errorMessage);
+} else {
+  inputElement.setCustomValidity('');
+}
+
+if (!inputElement.validity.valid) {
+  showInputError(formElement, inputElement, inputElement.validationMessage);
+} else {
+  hideInputError(formElement, inputElement);
+}
+}; 
 
 const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {

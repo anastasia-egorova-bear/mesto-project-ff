@@ -2,10 +2,8 @@ import './pages/index.css';
 import { createCard, deleteCard, toggleIsLiked } from './components/card.js';
 import { initialCards } from './scripts/cards.js'
 import { openModal, closeModal } from './components/modal.js';
-import { enableValidation, /*clearValidation, */ValidationConfig } from './components/validation.js';
-export { cardTemplate, 
-  // enableValidationConfig
- };
+import { enableValidation, /*clearValidation, */} from './components/validation.js';
+export { cardTemplate };
 
 const content = document.querySelector('.content');
 const cardTemplate = document.querySelector('#card-template').content;
@@ -30,14 +28,14 @@ const formElementPlace = document.querySelector('.popup__form[name="new-place"]'
 const placeNameInput = formElementPlace.querySelector('.popup__input_type_card-name');
 const linkImageInput = formElementPlace.querySelector('.popup__input_type_url');
 
-/*const enableValidationConfig = {
+const ValidationConfig = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button',
   inactiveButtonClass: 'popup__button_disabled',
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
-};*/
+};
 
 function renderCard() {
   initialCards.forEach(({ name, link }) => {
