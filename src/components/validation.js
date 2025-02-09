@@ -13,8 +13,12 @@ const ValidationConfig = {
 };
 
   const showInputError = (formElement, inputElement, errorMessage) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  const errorElement = document.getElementById(`${inputElement.id}-error`);
   inputElement.classList.add('popup__input_type_error');
+  // console.log("showInputError", formElement);
+  // console.log("showInputError", errorElement);
+  // console.log("showInputError", errorMessage);
+  // console.log("showInputError", `.${inputElement.id}-error`);
   errorElement.textContent = errorMessage;
   errorElement.classList.add('popup__error_visible');
 };
@@ -34,7 +38,7 @@ const checkInputValidity = (formElement, inputElement) => {
     inputElement.setCustomValidity('');
   }
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
+    showInputError(formElement, inputElement, inputElement.dataset.errorMessage);
   } else {
     hideInputError(formElement, inputElement);
   }

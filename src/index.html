@@ -71,7 +71,7 @@
               id="description-input"
               required
             />
-            <span class="popup__error" id="description-error"></span>
+            <span class="popup__error" id="description-input-error"></span>
           </div>
             <button type="submit" class="button popup__button">
               Сохранить
@@ -93,10 +93,11 @@
             minlength="2"
             maxlength="30"
             pattern="^[A-Za-zА-Яа-яЁё\s]+$"
+            data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
             id="place-name-input"
             required
             />
-            <span class="popup__error" id="place-name-error"></span>
+            <span class="popup__error" id="place-name-input-error"></span>
           </div>
           <div>
             <input
@@ -104,10 +105,11 @@
                 name="link"
                 class="popup__input popup__input_type_url"
                 placeholder="Ссылка на картинку"
+                data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
                 id="place-link-input"
                 required
             />
-            <span class="popup__error" id="place-link-error"></span>
+            <span class="popup__error" id="place-link-input-error"></span>
           </div>
             <button type="submit" class="button popup__button">
               Сохранить
