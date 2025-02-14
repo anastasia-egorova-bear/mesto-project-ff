@@ -2,7 +2,7 @@ import './pages/index.css';
 import { createCard, deleteCard, toggleIsLiked } from './components/card.js';
 import { initialCards } from './scripts/cards.js'
 import { openModal, closeModal } from './components/modal.js';
-import { enableValidation, /*clearValidation, */} from './components/validation.js';
+import { enableValidation, clearValidation } from './components/validation.js';
 export { cardTemplate };
 
 const content = document.querySelector('.content');
@@ -28,7 +28,7 @@ const formElementPlace = document.querySelector('.popup__form[name="new-place"]'
 const placeNameInput = formElementPlace.querySelector('.popup__input_type_card-name');
 const linkImageInput = formElementPlace.querySelector('.popup__input_type_url');
 
-const ValidationConfig = {
+const validationConfig = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button',
@@ -58,10 +58,11 @@ function handleEditProfileSubmit(evt) {
   profileDescription.textContent = jobInput.value;
 
   closeModal(popupIsOpened);
+  // clearValidation()
 }
 
 function handleAddCardSubmit(evt) {
-  evt.preventDefault();
+  evt.preventDefault(validationConfig);
 
   const popupIsOpened = document.querySelector('.popup_is-opened');
   const name = placeNameInput.value;
@@ -71,6 +72,7 @@ function handleAddCardSubmit(evt) {
 
   formElementPlace.reset();
   closeModal(popupIsOpened);
+  clearValidation(formElementPlace, validationConfig);
 }
 
 popupOverlayList.forEach(popup => popup.classList.add('popup_is-animated'));
@@ -87,7 +89,7 @@ profileButton.addEventListener('click', () => {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileDescription.textContent;
 
-  // clearValidation(popupEditContent, config)
+  // clearValidation(popupEditContent, ValidationConfig)
   openModal(popupEditContent);
 
 });
@@ -101,8 +103,8 @@ renderCard();
 //НАСТРАИВАЕМ ОБРАБОТЧИКИ ЗАКРЫТИЯ ПОПАПОВ
 
 //ВКЛЮЧАЕМ ВАЛИДАЦИЮ
-enableValidation(ValidationConfig);
-
+// enableValidation(ValidationConfig);
+enableValidation(validationConfig);
 /*
 ЗАГРУЖАЕМ ДАННЫЕ И ОТРИСОВЫВАЕМБ ТК ДЛЯ ОТОБРАДЕНИЯ НУЖЕН id пользователя
 то обязательно нужен Promise.all, но допукается 

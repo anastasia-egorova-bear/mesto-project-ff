@@ -1,6 +1,6 @@
 // import { ValidationConfig } from '../index.js'
 export { enableValidation, 
-  // clearValidation, 
+  clearValidation, 
 }
 
 // const ValidationConfig = {
@@ -19,15 +19,16 @@ export { enableValidation,
   // console.log("showInputError", errorElement);
   // console.log("showInputError", errorMessage);
   // console.log("showInputError", `.${inputElement.id}-error`);
-  errorElement.textContent = errorMessage;
   errorElement.classList.add('popup__error_visible');
+  errorElement.textContent = errorMessage;
 };
 
-const hideInputError = (formElement, inputElement) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`)
+const hideInputError = (/*formElement, */inputElement) => {
+  // const errorElement = formElement.querySelector(`.${inputElement.id}-error`)
+  const errorElement = document.getElementById(`${inputElement.id}-error`);
   inputElement.classList.remove('popup__input_type_error');
-  inputElement.setCustomValidity('')
-  errorElement.classList.remove('popup__input_type_error');
+  // inputElement.setCustomValidity("");
+  errorElement.classList.remove('popup__error_visible');
   errorElement.textContent = '';
 };
 
@@ -99,16 +100,16 @@ const enableValidation = () => {
 //   });
 // }
 
-// const clearValidation = (formElement) => {
-//   const inputList = Array.from(
-//     formElement.querySelectorAll('.popup__input')
-//   );
-//   const buttonElement = formElement.querySelector('.popup__button');
-//   inputList.forEach((inputElement) => {
-//     hideInputError(formElement, inputElement);
-//   });
-//   toggleButtonState(inputList, buttonElement)
-// }
+const clearValidation = (formElement) => {
+  const inputList = Array.from(
+    formElement.querySelectorAll('.popup__input')
+  );
+  const buttonElement = formElement.querySelector('.popup__button');
+  inputList.forEach((inputElement) => {
+    hideInputError(formElement, inputElement);
+  });
+  toggleButtonState(inputList, buttonElement)
+}
 
 
 
