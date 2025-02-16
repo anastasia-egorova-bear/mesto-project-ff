@@ -1,6 +1,5 @@
 // import { ValidationConfig } from '../index.js'
-export { enableValidation, 
-  clearValidation, 
+export { enableValidation, clearValidation
 }
 
 // const ValidationConfig = {
@@ -13,7 +12,9 @@ export { enableValidation,
 // };
 
   const showInputError = (formElement, inputElement, errorMessage) => {
+    // const errorElement = document.querySelector(`.${inputElement.id}-error`)
   const errorElement = document.getElementById(`${inputElement.id}-error`);
+  // const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add('popup__input_type_error');
   // console.log("showInputError", formElement);
   // console.log("showInputError", errorElement);
@@ -23,8 +24,9 @@ export { enableValidation,
   errorElement.textContent = errorMessage;
 };
 
-const hideInputError = (/*formElement, */inputElement) => {
-  // const errorElement = formElement.querySelector(`.${inputElement.id}-error`)
+const hideInputError = (formElement, inputElement) => {
+  // const errorElement = document.querySelector(`.${inputElement.id}-error`)
+  // const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   const errorElement = document.getElementById(`${inputElement.id}-error`);
   inputElement.classList.remove('popup__input_type_error');
   // inputElement.setCustomValidity("");
@@ -34,14 +36,10 @@ const hideInputError = (/*formElement, */inputElement) => {
 
 const checkInputValidity = (formElement, inputElement) => {
   if (inputElement.validity.patternMismatch) {
-      // данные атрибута доступны у элемента инпута через ключевое слово dataset.
-      // обратите внимание, что в js имя атрибута пишется в camelCase (да-да, в
-      // HTML мы писали в kebab-case, это не опечатка)
   inputElement.setCustomValidity(inputElement.dataset.errorMessage);
 } else {
   inputElement.setCustomValidity('');
 }
-
 if (!inputElement.validity.valid) {
   showInputError(formElement, inputElement, inputElement.validationMessage);
 } else {
@@ -81,24 +79,24 @@ const setEventListeners = (formElement) => {
   });
 };
 
-const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll('.popup__form'));
+// const enableValidation = () => {
+//   const formList = Array.from(document.querySelectorAll('.popup__form'));
+//   formList.forEach((formElement) => {
+//     setEventListeners(formElement);
+//   });
+// }
+
+function enableValidation() {
+  const formList = Array.from(
+    document.querySelectorAll('.popup__form')
+  );
   formList.forEach((formElement) => {
+    formElement.addEventListener("submit", (evt) => {
+      evt.preventDefault();
+    });
     setEventListeners(formElement);
   });
 }
-
-// function enableValidation(validationConfig) {
-//   const formList = Array.from(
-//     document.querySelectorAll(validationConfig.formSelector)
-//   );
-//   formList.forEach((formElement) => {
-//     formElement.addEventListener("submit", (evt) => {
-//       evt.preventDefault();
-//     });
-//     setEventListeners(validationConfig, formElement);
-//   });
-// }
 
 const clearValidation = (formElement) => {
   const inputList = Array.from(

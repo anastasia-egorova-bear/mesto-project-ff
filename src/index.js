@@ -58,7 +58,6 @@ function handleEditProfileSubmit(evt) {
   profileDescription.textContent = jobInput.value;
 
   closeModal(popupIsOpened);
-  // clearValidation()
 }
 
 function handleAddCardSubmit(evt) {
@@ -70,9 +69,7 @@ function handleAddCardSubmit(evt) {
 
   placesList.prepend(createCard({name, link}, deleteCard, toggleIsLiked, openPopupImage));
 
-  formElementPlace.reset();
   closeModal(popupIsOpened);
-  clearValidation(formElementPlace, validationConfig);
 }
 
 popupOverlayList.forEach(popup => popup.classList.add('popup_is-animated'));
@@ -89,12 +86,14 @@ profileButton.addEventListener('click', () => {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileDescription.textContent;
 
-  // clearValidation(popupEditContent, ValidationConfig)
+  clearValidation(popupEditContent, validationConfig);
   openModal(popupEditContent);
 
 });
 
 addButton.addEventListener('click', () => {
+  clearValidation(popupAddContent, validationConfig);
+  formElementPlace.reset();
   openModal(popupAddContent);
 });
 
