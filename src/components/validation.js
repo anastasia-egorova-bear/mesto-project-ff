@@ -1,15 +1,5 @@
 // import { ValidationConfig } from '../index.js'
-export { enableValidation, clearValidation
-}
-
-// const ValidationConfig = {
-//   formSelector: '.popup__form',
-//   inputSelector: '.popup__input',
-//   submitButtonSelector: '.popup__button',
-//   inactiveButtonClass: '.popup__button_disabled',
-//   inputErrorClass: '.popup__input_type_error',
-//   errorClass: '.popup__error_visible'
-// };
+export { enableValidation, clearValidation }
 
   const showInputError = (formElement, inputElement, errorMessage) => {
     // const errorElement = document.querySelector(`.${inputElement.id}-error`)
@@ -25,11 +15,8 @@ export { enableValidation, clearValidation
 };
 
 const hideInputError = (formElement, inputElement) => {
-  // const errorElement = document.querySelector(`.${inputElement.id}-error`)
-  // const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   const errorElement = document.getElementById(`${inputElement.id}-error`);
   inputElement.classList.remove('popup__input_type_error');
-  // inputElement.setCustomValidity("");
   errorElement.classList.remove('popup__error_visible');
   errorElement.textContent = '';
 };
@@ -78,13 +65,6 @@ const setEventListeners = (formElement) => {
     });
   });
 };
-
-// const enableValidation = () => {
-//   const formList = Array.from(document.querySelectorAll('.popup__form'));
-//   formList.forEach((formElement) => {
-//     setEventListeners(formElement);
-//   });
-// }
 
 function enableValidation() {
   const formList = Array.from(
