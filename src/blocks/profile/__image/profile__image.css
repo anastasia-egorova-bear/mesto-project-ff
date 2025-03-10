@@ -7,6 +7,21 @@
   background-size: cover;
   background-position: center;
   margin: 0 29px 0 0;
+  cursor: pointer;
+  position: relative;
+}
+
+.profile__image:hover {
+  filter: brightness(0.4);
+}
+
+.profile__image:hover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('../../../images/editeProfile.svg') center no-repeat;
+  background-size: 20px;
+  color: #fff;
 }
 
 @media screen and (max-width: 740px) {
