@@ -17,7 +17,7 @@ const popupAddContent = document.querySelector('.popup_type_new-card');
 const popupOverlayList = document.querySelectorAll('.popup');
 const popupTypeImage = document.querySelector('.popup_type_image');
 const popupImage = popupTypeImage.querySelector('.popup__image');
-const popupCaption = popupTypeImage.querySelector('.popup__caption');
+const popupImageCaption = popupTypeImage.querySelector('.popup__caption');
 const popupCloseList = document.querySelectorAll('.popup__close');
 const formElementProfile = document.querySelector('.popup__form[name="edit-profile"]');
 const nameInput = formElementProfile.querySelector('.popup__input_type_name');
@@ -59,15 +59,14 @@ const renderLoading = (isLoading, formElement) => {
 function openPopupImage(image) {
   popupImage.src = image.src
   popupImage.alt = image.alt;
-  popupCaption.textContent = image.alt;
+  popupImageCaption.textContent = image.alt;
   openModal(popupTypeImage);
 }
 
 function handleEditProfileSubmit(evt) {
   evt.preventDefault();
   renderLoading(true, formElementProfile);
-  const popupIsOpened = document.querySelector('.popup_is-opened');
-
+  
   profileTitle.textContent = nameInput.value;
   profileDescription.textContent = jobInput.value;
 
@@ -135,9 +134,10 @@ profileButton.addEventListener('click', () => {
   openModal(popupEditContent);
 });
 
-addButton.addEventListener('click', () => {
-  clearValidation(popupAddContent, validationConfig);
+addButton.addEventListener('click', (evt) => {
+  evt.preventDefault();
   formElementPlace.reset();
+  clearValidation(popupAddContent, validationConfig);
   openModal(popupAddContent);
 });
 
@@ -159,5 +159,4 @@ Promise.all([getAboutUser(), getCardList()])
   initialCards.forEach((cardData) => {
     placesList.append(createCard(cardData, deleteCard, likeCard, openPopupImage, userId))})
 })
-
-
+// .catch(err => console.log(err))
