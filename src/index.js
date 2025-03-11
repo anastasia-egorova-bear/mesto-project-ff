@@ -1,6 +1,5 @@
 import './pages/index.css'; 
-import { createCard, deleteCard, likeCard
-} from './components/card.js';
+import { createCard, deleteCard, likeCard } from './components/card.js';
 import { openModal, closeModal } from './components/modal.js';
 import { enableValidation, clearValidation } from './components/validation.js';
 import { getAboutUser, getCardList, editProfile, handleaddCard, createAvatar} from './components/api.js'
@@ -57,7 +56,7 @@ const renderLoading = (isLoading, formElement) => {
 }
 
 function openPopupImage(image) {
-  popupImage.src = image.src
+  popupImage.src = image.src;
   popupImage.alt = image.alt;
   popupImageCaption.textContent = image.alt;
   openModal(popupTypeImage);
@@ -66,15 +65,12 @@ function openPopupImage(image) {
 function handleEditProfileSubmit(evt) {
   evt.preventDefault();
   renderLoading(true, formElementProfile);
-  
-  profileTitle.textContent = nameInput.value;
-  profileDescription.textContent = jobInput.value;
 
   editProfile(nameInput.value, jobInput.value)
 		.then(userData => {
 			profileTitle.textContent = userData.name,
 			profileDescription.textContent = userData.about,
-			closeModal(popupIsOpened)
+			closeModal();
 		})
 		.catch(err => console.log(err))
 		.finally(() => {
@@ -86,14 +82,13 @@ function handleAddCardSubmit(evt) {
   evt.preventDefault(validationConfig);
   renderLoading(true, formElementPlace);
 
-  const popupIsOpened = document.querySelector('.popup_is-opened');
   const name = placeNameInput.value;
   const link = linkImageInput.value;
 
   handleaddCard(name, link)
   .then((cardData) => {
     placesList.prepend(createCard(cardData, deleteCard, likeCard, openPopupImage, userId));
-    closeModal(popupIsOpened);
+    closeModal();
   })
   .catch(err => console.log(err))
   .finally(() => {
@@ -106,12 +101,11 @@ function handleEditAvatarSubmit (evt) {
   renderLoading(true, formElementAvatar);
 
   const avatarUrl = urlAvatarInput.value;
-  const popupIsOpened = document.querySelector('.popup_is-opened');
 
   createAvatar(avatarUrl)
   .then(() => {
     profileImage.style.backgroundImage = `url(${avatarUrl})`;
-    closeModal(popupIsOpened);
+    closeModal();
   })
   .catch(err => console.log(err))
   .finally(() => {
@@ -122,7 +116,7 @@ function handleEditAvatarSubmit (evt) {
 popupOverlayList.forEach(popup => popup.classList.add('popup_is-animated'));
 
 popupCloseList.forEach(button => button.addEventListener('click', () => { 
-  closeModal(document.querySelector('.popup_is-opened')); 
+  closeModal(); 
 }));
 
 formElementProfile.addEventListener('submit', handleEditProfileSubmit); 
@@ -130,6 +124,8 @@ formElementPlace.addEventListener('submit', handleAddCardSubmit);
 formElementAvatar.addEventListener('submit', handleEditAvatarSubmit);
 
 profileButton.addEventListener('click', () => {
+  nameInput.value = profileTitle.textContent;
+  jobInput.value = profileDescription.textContent;
   clearValidation(popupEditContent, validationConfig);
   openModal(popupEditContent);
 });
@@ -159,4 +155,4 @@ Promise.all([getAboutUser(), getCardList()])
   initialCards.forEach((cardData) => {
     placesList.append(createCard(cardData, deleteCard, likeCard, openPopupImage, userId))})
 })
-// .catch(err => console.log(err))
+.catch(err => console.log(err))

@@ -27,20 +27,10 @@ export function createCard(
 
   cardImage.addEventListener("click", () => openPopupImage(cardImage));
 
-  // let isImLike;
-  
-  // cardData.likes.forEach(element => {
-  //   isImLike = element._id === userId;
-  // });
-
-  // if (cardData.likes.length > 0 & isImLike) {
-  //     likeButton.classList.toggle("card__like-button_is-active");
-  // }
-
-  const userHasLiked = cardData.likes.some(like => like._id === userId)
-	if (userHasLiked) {
-		likeButton.classList.add('card__like-button_is-active')
-	}
+  const userHasLiked = cardData.likes.some((like) => like._id === userId);
+  if (userHasLiked) {
+    likeButton.classList.add("card__like-button_is-active");
+  }
 
   likeButton.addEventListener("click", () => {
     likeCard(likeButton, cardId, likeCountElement);

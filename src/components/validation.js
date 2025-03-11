@@ -66,18 +66,6 @@ function enableValidation(config) {
   });
 }
 
-// function enableValidation(config) { 
-//   const formList = Array.from( 
-//     document.querySelectorAll(config.formSelector) 
-//   ); 
-//   formList.forEach((formElement) => { 
-//     formElement.addEventListener("submit", (evt) => { 
-//     }); 
-//     setEventListeners(formElement, config); 
-//   }); 
-// } 
-
-
 const clearValidation = (formElement, config) => {
   const inputList = Array.from(
     formElement.querySelectorAll(config.inputSelector)

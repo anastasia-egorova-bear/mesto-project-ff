@@ -1,28 +1,29 @@
 export { openModal, closeModal };
 
-function openModal(popupContent) { 
-  popupContent.classList.add('popup_is-opened'); 
-   
-  document.addEventListener('keyup', closeDownEscape); 
-  document.addEventListener('mousedown', overlayMouseDown); 
-}; 
+function openModal(popupContent) {
+  popupContent.classList.add("popup_is-opened");
 
-function closeModal(openPopup) {
-  openPopup.classList.remove('popup_is-opened');
-
-  document.removeEventListener('keyup', closeDownEscape);
-  document.removeEventListener('mousedown', overlayMouseDown);
+  document.addEventListener("keyup", closeDownEscape);
+  document.addEventListener("mousedown", overlayMouseDown);
 }
 
-function overlayMouseDown(evt){
-  if(!evt.target.classList.contains('popup_is-opened')) return;
-  closeModal(evt.target); 
+function closeModal() {
+  document
+    .querySelector(".popup_is-opened")
+    .classList.remove("popup_is-opened");
+
+  document.removeEventListener("keyup", closeDownEscape);
+  document.removeEventListener("mousedown", overlayMouseDown);
 }
 
-function closeDownEscape (evt) {
-  if (evt.key === 'Escape') {
-    const popupIsOpen = document.querySelector('.popup_is-opened');
+function overlayMouseDown(evt) {
+  if (!evt.target.classList.contains("popup_is-opened")) return;
+  closeModal(evt.target);
+}
+
+function closeDownEscape(evt) {
+  if (evt.key === "Escape") {
+    const popupIsOpen = document.querySelector(".popup_is-opened");
     closeModal(popupIsOpen);
   }
-};
-
+}
