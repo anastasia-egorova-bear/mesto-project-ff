@@ -70,7 +70,7 @@ function handleEditProfileSubmit(evt) {
 		.then(userData => {
 			profileTitle.textContent = userData.name,
 			profileDescription.textContent = userData.about,
-			closeModal();
+			closeModal(popupEditContent);
 		})
 		.catch(err => console.log(err))
 		.finally(() => {
@@ -88,7 +88,7 @@ function handleAddCardSubmit(evt) {
   handleaddCard(name, link)
   .then((cardData) => {
     placesList.prepend(createCard(cardData, deleteCard, likeCard, openPopupImage, userId));
-    closeModal();
+    closeModal(popupAddContent);
   })
   .catch(err => console.log(err))
   .finally(() => {
@@ -103,9 +103,9 @@ function handleEditAvatarSubmit (evt) {
   const avatarUrl = urlAvatarInput.value;
 
   createAvatar(avatarUrl)
-  .then(() => {
-    profileImage.style.backgroundImage = `url(${avatarUrl})`;
-    closeModal();
+  .then((userData) => {
+    profileImage.style.backgroundImage = `url(${userData.avatarUrl})`;
+    closeModal(popupAvatarContent);
   })
   .catch(err => console.log(err))
   .finally(() => {
@@ -116,7 +116,8 @@ function handleEditAvatarSubmit (evt) {
 popupOverlayList.forEach(popup => popup.classList.add('popup_is-animated'));
 
 popupCloseList.forEach(button => button.addEventListener('click', () => { 
-  closeModal(); 
+  const popup = button.closest('.popup');  
+  closeModal(popup);
 }));
 
 formElementProfile.addEventListener('submit', handleEditProfileSubmit); 
@@ -138,8 +139,8 @@ addButton.addEventListener('click', (evt) => {
 });
 
 profileImage.addEventListener('click', () => {
-  clearValidation(popupAvatarContent, validationConfig);
   formElementAvatar.reset();
+  clearValidation(popupAvatarContent, validationConfig);
   openModal(popupAvatarContent);
 })
 

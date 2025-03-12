@@ -7,14 +7,12 @@ function openModal(popupContent) {
   document.addEventListener("mousedown", overlayMouseDown);
 }
 
-function closeModal() {
-  document
-    .querySelector(".popup_is-opened")
-    .classList.remove("popup_is-opened");
-
-  document.removeEventListener("keyup", closeDownEscape);
-  document.removeEventListener("mousedown", overlayMouseDown);
-}
+function closeModal(openPopup) { 
+  openPopup.classList.remove('popup_is-opened'); 
+ 
+  document.removeEventListener('keyup', closeDownEscape); 
+  document.removeEventListener('mousedown', overlayMouseDown); 
+} 
 
 function overlayMouseDown(evt) {
   if (!evt.target.classList.contains("popup_is-opened")) return;
