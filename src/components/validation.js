@@ -1,15 +1,16 @@
 export { enableValidation, clearValidation };
 
-const showInputError = (inputElement, errorMessage, config) => {
-  const errorElement = document.getElementById(`${inputElement.id}-error`);
-
+const showInputError = (formElement, inputElement, errorMessage, config) => {
+  // const errorElement = document.getElementById(`${inputElement.id}-error`);
+  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
   inputElement.classList.add(config.inputErrorClass);
   errorElement.classList.add(config.errorClass);
   errorElement.textContent = errorMessage;
 };
 
-const hideInputError = (inputElement, config) => {
-  const errorElement = document.getElementById(`${inputElement.id}-error`);
+const hideInputError = (formElement, inputElement, config) => {
+  // const errorElement = document.getElementById(`${inputElement.id}-error`);
+  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
   inputElement.classList.remove(config.inputErrorClass);
   errorElement.classList.remove(config.errorClass);
   errorElement.textContent = "";
@@ -22,9 +23,9 @@ const checkInputValidity = (inputElement, config) => {
     inputElement.setCustomValidity("");
   }
   if (!inputElement.validity.valid) {
-    showInputError(inputElement, inputElement.validationMessage, config);
+    showInputError(formElement, inputElement, inputElement.validationMessage, config);
   } else {
-    hideInputError(inputElement, config);
+    hideInputError(formElement, inputElement, config);
   }
 };
 
@@ -72,7 +73,7 @@ const clearValidation = (formElement, config) => {
   );
   const buttonElement = formElement.querySelector(config.submitButtonSelector);
   inputList.forEach((inputElement) => {
-    hideInputError(inputElement, config);
+    hideInputError(formElement, inputElement, config);
   });
   toggleButtonState(inputList, buttonElement, config);
 };
