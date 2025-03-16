@@ -1,7 +1,6 @@
 export { enableValidation, clearValidation };
 
 const showInputError = (formElement, inputElement, errorMessage, config) => {
-  // const errorElement = document.getElementById(`${inputElement.id}-error`);
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
   inputElement.classList.add(config.inputErrorClass);
   errorElement.classList.add(config.errorClass);
@@ -9,14 +8,13 @@ const showInputError = (formElement, inputElement, errorMessage, config) => {
 };
 
 const hideInputError = (formElement, inputElement, config) => {
-  // const errorElement = document.getElementById(`${inputElement.id}-error`);
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
   inputElement.classList.remove(config.inputErrorClass);
   errorElement.classList.remove(config.errorClass);
   errorElement.textContent = "";
 };
 
-const checkInputValidity = (inputElement, config) => {
+const checkInputValidity = (formElement, inputElement, config) => {
   if (inputElement.validity.patternMismatch) {
     inputElement.setCustomValidity(inputElement.dataset.errorMessage);
   } else {
@@ -54,7 +52,7 @@ const setEventListeners = (formElement, config) => {
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", function () {
-      checkInputValidity(inputElement, config);
+      checkInputValidity(formElement, inputElement, config);
       toggleButtonState(inputList, buttonElement, config);
     });
   });
